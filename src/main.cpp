@@ -4,7 +4,12 @@
 using namespace std;
 
 int main() {
-  cout << "Woahhhhh" << endl;
-  cout << "test pr with GitHub CLI and LazyGit" << endl;
+
+  char option;
+
+  /* while (true) {
+    
+  } */
+  print_opts(options);
   return 0;
 }
