@@ -38,4 +38,4 @@ Make sure to add these properties to the JSON file when adding a new task and up
 
 
 ## CREDIT
-- This idea is in no way my own nor are the requirements idea properties from my own creativity. I give full credit to the people at **[Roadmap.sh](https://roadmap.sh)** for the project that they have presented me with. My own work is simply the coding implementation.
+- This idea is in no way my own nor are the requirements or task properties from my own creativity. I give full credit to the people at **[Roadmap.sh](https://roadmap.sh)** for the project that they have presented me with. My own work is simply the coding implementation.
