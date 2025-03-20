@@ -8,6 +8,7 @@ using namespace std;
 int main() {
   char option;
   string empty;
+  Task temp;
 
   cout << "-----WELCOME TO YOUR TASKS-----" << endl
        << "    CLICK ENTER TO CONTINUE " << endl;
