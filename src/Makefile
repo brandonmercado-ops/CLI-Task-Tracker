@@ -2,7 +2,7 @@
 
 all: main
 	./main
-main: main.cpp tasks/task.cpp
-	g++ -std=c++20 main.cpp tasks/task.cpp -o main
+main: main.cpp tasks/task.cpp tasks/task_list.cpp
+	g++ -std=c++23 main.cpp tasks/task.cpp tasks/task_list.cpp -o main
 clean:
 	rm main
