@@ -3,14 +3,23 @@
 #include "tasks/task_list.hpp"
 #include <cctype>
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
 using namespace std;
+
+ifstream done("json/tasks_done.json");
+ifstream ip("json/tasks_ip.json");
+ifstream todo("json/tasks_todo.json");
+void find_jsons();
 
 int main() {
   char option;
   string empty;
   Task temp;
   TaskList tmp;
+
+  // Open json files if they exist, create them if they do not exist
+  find_jsons();
 
   cout << "-----WELCOME TO YOUR TASKS-----" << endl
        << "    CLICK ENTER TO CONTINUE " << endl;
@@ -47,5 +56,26 @@ int main() {
  statement */
 end_loop:
 
+  done.close();
+  ip.close();
+  todo.close();
   return 0;
+}
+
+void find_jsons() {
+  if (done.is_open() && ip.is_open() && todo.is_open()) {
+    cout << "these files exists and are open!" << endl;
+  }
+
+  else {
+    if (!done.is_open()) {
+      system("touch json/done.json");
+    }
+    if (!ip.is_open()) {
+      system("touch json/ip.json");
+    }
+    if (!todo.is_open()) {
+      system("touch json/todo.json");
+    }
+  }
 }
