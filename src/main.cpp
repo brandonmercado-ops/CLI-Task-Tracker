@@ -19,6 +19,7 @@ int main() {
   TaskList tmp;
 
   // Open json files if they exist, create them if they do not exist
+  // from handle_json.cpp
   find_jsons();
 
   cout << "-----WELCOME TO YOUR TASKS-----" << endl
@@ -62,6 +63,7 @@ end_loop:
   return 0;
 }
 
+
 void find_jsons() {
   if (done.is_open() && ip.is_open() && todo.is_open()) {
     cout << "these files exists and are open!" << endl;
@@ -69,13 +71,13 @@ void find_jsons() {
 
   else {
     if (!done.is_open()) {
-      system("touch json/done.json");
+      system("touch json/tasks_done.json");
     }
     if (!ip.is_open()) {
-      system("touch json/ip.json");
+      system("touch json/tasks_ip.json");
     }
     if (!todo.is_open()) {
-      system("touch json/todo.json");
+      system("touch json/tasks_todo.json");
     }
   }
 }
