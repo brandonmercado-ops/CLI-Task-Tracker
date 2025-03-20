@@ -27,7 +27,7 @@ int main() {
 
     // HANDLE USER QUIT OUTSIDE OF SWITCH CASE
     if (option == 'Q') {
-      cout << "Exiting program..." << endl << "Goodbye!" << endl;
+      cout << endl << "Exiting program..." << endl << "Goodbye!" << endl;
       break;
     }
 
