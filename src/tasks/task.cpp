@@ -46,6 +46,10 @@ void create_task() {
       getline(cin, cont);
     } else {
       done = true;
+      Task toAdd(i_id, i_desc, i_status, i_createdAt, i_updatedAt);
+      // At this stage, the task object has been created. All that is left is to
+      // write this task into the respective json file (according to the status
+      // of the task)
     }
   }
 
