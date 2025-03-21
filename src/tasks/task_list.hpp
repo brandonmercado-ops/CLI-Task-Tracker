@@ -10,6 +10,7 @@ private:
 
 public:
   bool search(Task &t);
+  void show_tasks();
 
   // CONSTRUCTOR & DESTRUCTOR
   TaskList();

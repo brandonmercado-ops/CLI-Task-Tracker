@@ -17,6 +17,12 @@ private:
 public:
   Task(string i, string d, string s, string c, string u)
       : id(i), desc(d), status(s), createdAt(c), updatedAt(u) {};
+
+  string get_id();
+  string get_desc();
+  string get_status();
+  string get_created();
+  string get_updated();
 };
 
 #endif

@@ -5,6 +5,11 @@
 using namespace std;
 
 // STANDALONE FUNCTIONS OUTSIDE OF CLASS
+string Task::get_id() { return id; };
+string Task::get_desc() { return desc; };
+string Task::get_status(){ return status; };
+string Task::get_created(){ return createdAt; };
+string Task::get_updated(){ return updatedAt; };
 
 void create_task() {
 
