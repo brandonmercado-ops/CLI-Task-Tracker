@@ -5,18 +5,22 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <limits>
 using namespace std;
 
-ifstream done("json/tasks_done.json");
-ifstream ip("json/tasks_ip.json");
-ifstream todo("json/tasks_todo.json");
+// DECLARATIONS
+ifstream done_f("json/tasks_done.json");
+ifstream ip_f("json/tasks_ip.json");
+ifstream todo_f("json/tasks_todo.json");
 void find_jsons();
 
 int main() {
   char option;
   string empty;
-  Task temp;
-  TaskList tmp;
+
+  TaskList done_l;
+  TaskList ip_l;
+  TaskList todo_l;
 
   // Open json files if they exist, create them if they do not exist
   // from handle_json.cpp
@@ -38,12 +42,16 @@ int main() {
     cin >> option;
     option = toupper(option);
 
+    // cin command above messes with getline() functions in create_task()
+    // function in case 'A' of option switch below
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
     switch (option) {
     case 'Q':
       cout << endl << "Exiting program..." << endl << "Goodbye!" << endl;
       goto end_loop; // Similar to MIPS ASM's branch instruction to label
     case 'A':
-      cout << endl << "YOU WANT TO CREATE A TASK" << endl;
+      create_task();
       break;
     case 'U':
       cout << endl << "YOU WANT TO UPDATE A TASK" << endl;
@@ -57,26 +65,25 @@ int main() {
  statement */
 end_loop:
 
-  done.close();
-  ip.close();
-  todo.close();
+  done_f.close();
+  ip_f.close();
+  todo_f.close();
   return 0;
 }
 
-
 void find_jsons() {
-  if (done.is_open() && ip.is_open() && todo.is_open()) {
+  if (done_f.is_open() && ip_f.is_open() && todo_f.is_open()) {
     cout << "these files exists and are open!" << endl;
   }
 
   else {
-    if (!done.is_open()) {
+    if (!done_f.is_open()) {
       system("touch json/tasks_done.json");
     }
-    if (!ip.is_open()) {
+    if (!ip_f.is_open()) {
       system("touch json/tasks_ip.json");
     }
-    if (!todo.is_open()) {
+    if (!todo_f.is_open()) {
       system("touch json/tasks_todo.json");
     }
   }

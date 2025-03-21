@@ -1,10 +1,10 @@
 #ifndef TASK_LIST_HPP
 #define TASK_LIST_HPP
 
-#include <vector>
 #include "task.hpp"
+#include <vector>
 
-class TaskList{
+class TaskList {
 private:
   vector<Task> list;
 

@@ -4,6 +4,8 @@
 #include <string>
 using namespace std;
 
+void create_task();
+
 class Task {
 private:
   string id;
