@@ -1,15 +1,16 @@
 #include "task.hpp"
 #include "../include/rapidjson/document.h"
+#include "../include/rapidjson/filereadstream.h"
 #include "../include/rapidjson/filewritestream.h"
-#include "../include/rapidjson/ostreamwrapper.h"
+// #include "../include/rapidjson/ostreamwrapper.h"
 #include "../include/rapidjson/prettywriter.h"
-#include "../include/rapidjson/writer.h"
-#include <filesystem>
-#include <fstream>
+// #include "../include/rapidjson/writer.h"
+// #include <filesystem>
+// #include <fstream>
 #include <iostream>
 #include <string>
 
-namespace fs = std::filesystem;
+// namespace fs = std::filesystem;
 using namespace std;
 using namespace rapidjson;
 
@@ -70,9 +71,6 @@ void create_task() {
     } else {
       done = true;
       Task toAdd(i_id, i_desc, i_status, i_createdAt, i_updatedAt);
-      // At this stage, the task object has been created. All that is left is to
-      // write this task into the respective json file (according to the status
-      // of the task)
 
       // Create JSON Document to write
       Document d;
@@ -92,23 +90,22 @@ void create_task() {
       d.AddMember("createdAt", createdValue, d.GetAllocator());
       d.AddMember("updatedAt", updatedValue, d.GetAllocator());
 
-      // Open output file respective to i_status
-      FILE *fp;
+      // Grab filepath for respective json files
+      const char *filepath;
       if (i_status == "done" || i_status == "Done" || i_status == "DONE") {
-        fp = fopen("/Users/brandonmercado/Desktop/CODE/C++/CLI-Task-Tracker/"
-                   "src/json/tasks_done.json",
-                   "w");
+        filepath = "/Users/brandonmercado/Desktop/CODE/C++/CLI-Task-Tracker/"
+                   "src/json/tasks_done.json";
+
       } else if (i_status == "in progress" || i_status == "In progress" ||
                  i_status == "In Progress" || i_status == "IN PROGRESS" ||
                  i_status == "ip" || i_status == "IP") {
-        fp = fopen("/Users/brandonmercado/Desktop/CODE/C++/CLI-Task-Tracker/"
-                   "src/json/tasks_ip.json",
-                   "w");
+        filepath = "/Users/brandonmercado/Desktop/CODE/C++/CLI-Task-Tracker/"
+                   "src/json/tasks_ip.json";
+
       } else if (i_status == "todo" || i_status == "Todo" ||
                  i_status == "TODO") {
-        fp = fopen("/Users/brandonmercado/Desktop/CODE/C++/CLI-Task-Tracker/"
-                   "src/json/tasks_todo.json",
-                   "w");
+        filepath = "/Users/brandonmercado/Desktop/CODE/C++/CLI-Task-Tracker/"
+                   "src/json/tasks_todo.json";
       } else {
         cout << "Incorrect input of status! Click enter to try again..."
              << endl;
@@ -117,6 +114,28 @@ void create_task() {
                             // to click enter
       }
 
+      // Open output file respective to i_status
+      // r+ means read mode to check if any tasks are already in json file
+      FILE *fp = fopen(filepath, "r+");
+      Document curr_doc;
+      if (fp != nullptr) {
+        // Read existing data to curr_doc
+        char readBuffer[65536];
+        FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+        curr_doc.ParseStream(is);
+        fclose(fp);
+      }
+
+      // Check if current document is an array and if its not, create one
+      if (!curr_doc.IsArray()) {
+        curr_doc.SetArray();
+      }
+
+      // Add newly created task to the array of tasks
+      curr_doc.PushBack(d, curr_doc.GetAllocator());
+
+      // Open file again to write
+      fp = fopen(filepath, "w");
       if (fp == nullptr) {
         cout << "FILE DID NOT OPEN CORRECTLY" << endl;
       } else {
@@ -125,12 +144,8 @@ void create_task() {
         FileWriteStream os(fp, writeBuffer, sizeof(writeBuffer));
         PrettyWriter<FileWriteStream> writer(os);
 
-        // TODO!!!
-        // WHEN WRITING MULTIPLE TASKS TO THE SAME FILE, IT OVERRIDES THE
-        // CURRENT TASK THAT IS INSIDE INSTEAD OF CREATING A NEW TASK AFTER IT
-
         // Accept writer
-        d.Accept(writer);
+        curr_doc.Accept(writer);
 
         // Close file once written
         fclose(fp);
