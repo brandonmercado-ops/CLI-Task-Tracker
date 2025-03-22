@@ -17,6 +17,7 @@ void find_jsons();
 int main() {
   char option;
   string empty;
+  bool done;
 
   TaskList done_l;
   TaskList ip_l;
@@ -49,7 +50,8 @@ int main() {
     switch (option) {
     case 'Q':
       cout << endl << "Exiting program..." << endl << "Goodbye!" << endl;
-      goto end_loop; // Similar to MIPS ASM's branch instruction to label
+      done = true;
+      break;
     case 'A':
       create_task();
       break;
@@ -60,10 +62,11 @@ int main() {
       cout << endl << "YOU WANT TO DELETE A TASK" << endl;
       break;
     }
+
+    if (done) {
+      break;
+    }
   }
-/*  Empty label to jump to in order to exit while loop from inside switch
- statement */
-end_loop:
 
   done_f.close();
   ip_f.close();
