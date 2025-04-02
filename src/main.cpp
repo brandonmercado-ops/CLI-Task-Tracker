@@ -77,7 +77,7 @@ int main() {
 
 void find_jsons() {
   if (done_f.is_open() && ip_f.is_open() && todo_f.is_open()) {
-    cout << "these files exists and are open!" << endl;
+    // cout << "these files exists and are open!" << endl;
   }
 
   else {
