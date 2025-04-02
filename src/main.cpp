@@ -36,6 +36,7 @@ int main() {
   // "Game" loop to keep program going until user quits
   while (true) {
     system("clear");
+    show_tasks();
     print_opts(options);
 
     // Prompt user for their input and capitalize it
