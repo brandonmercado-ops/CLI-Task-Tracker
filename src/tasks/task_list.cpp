@@ -31,11 +31,11 @@ TaskList::~TaskList() { list.clear(); }
 // Printing existing tasks in order of
 // DONE, In Progress, TODO in descending order
 void show_tasks() {
-  string fp_ip = "/Users/brandonmercado/Desktop/CODE/C++/CLI-Task-Tracker/"
-                 "src/json/tasks_ip.json";
+  // string fp_ip = "/Users/brandonmercado/Desktop/CODE/C++/CLI-Task-Tracker/"
+                 // "src/json/tasks_ip.json";
 
-  string fp_todo = "/Users/brandonmercado/Desktop/CODE/C++/CLI-Task-Tracker/"
-                   "src/json/tasks_todo.json";
+  // string fp_todo = "/Users/brandonmercado/Desktop/CODE/C++/CLI-Task-Tracker/"
+                   // "src/json/tasks_todo.json";
 
   // Open files
   FILE *f_done =
@@ -76,7 +76,7 @@ void show_tasks() {
       cout << "Empty!" << '\n';
     } else {
 
-      cout << "-------------------- DONE TASKS --------------------" << '\n';
+      cout << "-------------------- DONE TASKS ---------------------------" << '\n';
       for (rapidjson::SizeType i = 0; i < d_done.Size(); i++) {
         rapidjson::Value &task = d_done[i];
 
@@ -113,7 +113,7 @@ void show_tasks() {
       cout << "Empty!" << '\n';
     } else {
 
-      cout << "-------------------- COMPLETED TASKS --------------------"
+      cout << "-------------------- TODO TASKS ---------------------------"
            << '\n';
       for (rapidjson::SizeType i = 0; i < d_todo.Size(); i++) {
         rapidjson::Value &task = d_todo[i];
